@@ -95,14 +95,14 @@
             
               <li class="tag-list-container">
                 <a href="javascript:;">Tag</a>
-                
+                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li></ul>
               </li>
             
           
             
               <li class="archive-list-container">
                 <a href="javascript:;">Archive</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a><span class="archive-list-count">1</span></li></ul>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a><span class="archive-list-count">2</span></li></ul>
               </li>
             
           
@@ -166,6 +166,117 @@
           <h1><a href="/archives/2016" class="archive-year">2016</a></h1>
         </div>
         <div class="post-list">
+    
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2016/07/30/vim/" >
+  vim
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2016/07/30/vim/"><span class="article-date">
+  2016-07-30
+</span>
+</a>
+        
+
+        
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+	</span>
+
+
+      </div>
+      <div class="article-entry">
+        
+          <h2 id="vim-个人总结"><a href="#vim-个人总结" class="headerlink" title="vim 个人总结"></a>vim 个人总结</h2><h3 id="vim几个模式"><a href="#vim几个模式" class="headerlink" title="vim几个模式"></a>vim几个模式</h3><ul>
+<li>normal Mode 默认进行vim的模式</li>
+<li>visual Mode 可视模式<ul>
+<li>普通模式下按v进行</li>
+<li>ctrl + v 可视模式的块选择</li>
+</ul>
+</li>
+<li>insert Mode 插入模式<ul>
+<li>i 进入</li>
+</ul>
+</li>
+<li>select Mode 选择模式<ul>
+<li>gh进入</li>
+</ul>
+</li>
+<li>command-Line/Ex Mode 命令行模式<ul>
+<li>单命令行 :</li>
+<li>多命令行 Q</li>
+</ul>
+</li>
+</ul>
+<h3 id="map-映射"><a href="#map-映射" class="headerlink" title="map 映射"></a>map 映射</h3><ul>
+<li>命令组合<ul>
+<li>nore非递归</li>
+<li>n 普通模式下生效</li>
+<li>v 可视模式下生效</li>
+<li>i 插入模式下生效</li>
+<li>c 命令行模式下生效</li>
+</ul>
+</li>
+<li>Recursive Mapping 映射可递归</li>
+<li>unmap 删除映射</li>
+<li>mapclear 消除相关模式下的所有映射</li>
+</ul>
+<h3 id="辅助设置"><a href="#辅助设置" class="headerlink" title="辅助设置"></a>辅助设置</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">" 总是显示状态栏</span></div><div class="line"><span class="keyword">set</span> laststatus=<span class="number">2</span></div><div class="line"><span class="comment">" 显示光标当前位置</span></div><div class="line"><span class="keyword">set</span> ruler</div><div class="line"><span class="comment">" 开启行号显示</span></div><div class="line"><span class="keyword">set</span> <span class="keyword">number</span></div><div class="line"><span class="comment">" 高亮显示当前行/列</span></div><div class="line"><span class="keyword">set</span> cursorline</div><div class="line"><span class="keyword">set</span> cursorcolumn</div><div class="line"><span class="comment">" 高亮显示搜索结果</span></div><div class="line"><span class="keyword">set</span> hlsearch</div><div class="line"><span class="comment">" 随 vim 自启动</span></div><div class="line"><span class="keyword">let</span> <span class="variable">g:indent_guides_enable_on_vim_startup</span>=<span class="number">1</span></div><div class="line"><span class="comment">" 从第二层开始可视化显示缩进</span></div><div class="line"><span class="keyword">let</span> <span class="variable">g:indent_guides_start_level</span>=<span class="number">2</span></div><div class="line"><span class="comment">" 色块宽度</span></div><div class="line"><span class="keyword">let</span> <span class="variable">g:indent_guides_guide_size</span>=<span class="number">1</span></div><div class="line"><span class="comment">" 快捷键 i 开/关缩进可视化</span></div><div class="line">:<span class="keyword">nmap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;Leader&gt;</span>i <span class="symbol">&lt;Plug&gt;</span>IndentGuidesToggle</div><div class="line"><span class="comment">"</span></div></pre></td></tr></table></figure>
+<p><a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">vim设置</a></p>
+<h3 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h3><ul>
+<li>打开其他文件 :tabe path/source</li>
+<li>标签页中切换 gt</li>
+<li>分屏:sp :vsp </li>
+<li>分屏中切换ctrl + w + h/j/k/l 分别对左下上右</li>
+<li>进行关连文件 gf</li>
+<li>退回到原来的文件 ctrl + o</li>
+<li>折叠 </li>
+<li>块上下跳转 %</li>
+<li>添加统一信息，例如注释<br>  ctrl + v -&gt; ctrl + i -&gt; // -&gt; esc ,esc </li>
+<li><p>删除注释等<br>  ctrl + v -&gt; d </p>
+</li>
+<li><p>光标至行首shift + ^ </p>
+</li>
+<li>光标至行尾shift + $</li>
+<li>光标至行开头0</li>
+<li>光标移动 左下上右hjkl</li>
+<li>page down ctrl + f</li>
+<li>page up ctrl + b</li>
+<li>移动到文件尾G</li>
+</ul>
+<ul>
+<li>删除整行dd,删除N行dN</li>
+<li>dw删除一个词，d$ 删除到行尾，d0删除到行首</li>
+<li>dgg向上删除至第一行</li>
+<li>dG向下删除至最后一行</li>
+<li>u撤消</li>
+</ul>
+<ul>
+<li>y,yn复制，p粘贴</li>
+<li>w,b上下一个单词</li>
+<li></li>
+</ul>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><ul>
+<li>set:nu 开启行号</li>
+<li>set:nonu 取消行号</li>
+<li>set:diff 比较两个文件不同</li>
+</ul>
+
+        
+      </div>
+    </div>
+
+  
+
+  
+  
     
   
 
