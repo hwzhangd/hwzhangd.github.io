@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="null" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>life - 蓝色天空</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="2016-03-02 新年初始踩到的坑年初到现在一共工作12天，却觉得过了好久好久，特别精彩与长记性的感觉
+refer组件添加多次自动填充这事说大不大，说小不小，关键是在符合现有的条件来来实现，即最,"> 
+    <meta name="author" content="张小葱"> 
+    <link rel="alternative" href="atom.xml" title="蓝色天空" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">蓝色天空</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://hwzhangd.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">life</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">life</h1>
+        <div class="stuff">
+            <span>三月 02, 2016</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/life-MT/">life ,MT</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="2016-03-02-新年初始踩到的坑"><a href="#2016-03-02-新年初始踩到的坑" class="headerlink" title="2016-03-02 新年初始踩到的坑"></a>2016-03-02 新年初始踩到的坑</h2><p>年初到现在一共工作12天，却觉得过了好久好久，特别精彩与长记性的感觉</p>
+<h3 id="refer组件添加多次自动填充"><a href="#refer组件添加多次自动填充" class="headerlink" title="refer组件添加多次自动填充"></a>refer组件添加多次自动填充</h3><p>这事说大不大，说小不小，关键是在符合现有的条件来来实现，即最好不要造轮子。</p>
+<p>refer引用了typeahead.js来做自动填充。但是多次自动填充的话就会有很多问题，但是在强烈要求不要造轮子的情况下，通过查看typeahead.js的api也找到相应的解决方案。</p>
+<p>当时的难点在：</p>
+<pre><code>* 是否可添加新的选项
+* 如可添加新的选项，如果配置添加的接口与返回信息
+* 点击选项后取值并清空当前的input
+</code></pre><p>解决方案是做个基类，所有的可控项可配置，并将callback事件进行可配置，以应对修改其他信息。</p>
+<ul>
+<li>个人总结<ul>
+<li>做组件要有很多情况的考虑，但是不要过多</li>
+<li>方法不可写的太死，要可配置</li>
+<li>尽可能地不去造轮子（虽然是前端的通病）！不造轮子！不造轮子</li>
+</ul>
+</li>
+</ul>
+<h3 id="api检索问题"><a href="#api检索问题" class="headerlink" title="api检索问题"></a>api检索问题</h3><p>我戏说是一个or引用的惨案，虽然内心很纠结与难过。但是这次的原因主要在于自己对mysql掌握的不足以及太懒的跑测试造成的</p>
+<pre><code>select * from table where id = 100 or id = 101;
+select * from table where id in (100, 101)
+</code></pre><p>如果可以用in尽量不要用or，首先是in在检索速度要比or快，另一方面在检查不中的情况下出来的结果可能是下面这样： （我就是这么作死的 ~~）</p>
+<pre><code>select * from table where 100 or 101;
+</code></pre><p>不要问为什么会成这样！有一方面没有考虑到就会这样！测试用例没有修改，或者是用户端数据传输的不对就会这样！</p>
+<ul>
+<li>个人总结<ul>
+<li>多读，多看看别人怎么写的</li>
+<li>多实践，实践出真知！</li>
+<li>一定要用心写测试，提交之前跑全部测试</li>
+</ul>
+</li>
+</ul>
+<h3 id="功能回退"><a href="#功能回退" class="headerlink" title="功能回退"></a>功能回退</h3><p>在refer完成多次自动填充功能的情况下，决定正行现有情况的改造，在邀请和通知功能上进行实践，然后各种点点点，各种修改，两三天下完成了。也就是今天准备上线，然后产品觉得不行了。。。。。在沟通好久的情况下，我毅然决然的选择了回退，这时候脑子里默默的想起了锋哥说过的：做的不好还为什么要上线</p>
+<p>做的不好是什么概念？</p>
+<p>第一： 没有还原原来的功能，上线被吐槽，为什么之前的功能没有了</p>
+<p>第二： 没有完全完成预期的功能，还引进了bug。</p>
+<p>第三： 交互不够流畅不够快，给用户体验就是卡或者挫的感觉</p>
+<p>但是这三项我全占了。虽然实现看起来比较炫的功能。预期在完成其他辅助的功能之后再上一个相对来说完美一版。</p>
+<ul>
+<li>个人总结<ul>
+<li>多跟产品沟通下某项功能，全面了解用户需求</li>
+<li>多让吐槽龙code review，听吐槽龙吐槽代码特别长姿势</li>
+<li>不要一次把功能修改的特别大，步子大了容易裂裆</li>
+</ul>
+</li>
+</ul>
+<h3 id="今天的我"><a href="#今天的我" class="headerlink" title="今天的我"></a>今天的我</h3><p>其实下午的时候是特别郁闷的，三个比较大的功能虽然都是基于一个上做的实现，但是中间都有好多问题，连续挺吐槽龙吐槽了好久我的代码，然后下午发现有段代码有问题，准备删掉的时候被张弛发现了，接着吐槽了。。。<br>然后说说代码上我的问题</p>
+<pre><code>* 命名。变量命名是被吐槽龙吐槽最多的，找合适的名字很难，尤其是在写业务的时候有时候会假死
+* 正则。 有时候可以用逻辑来完成的事情，一行正则也就搞定了。
+* 马虎不仔细。
+* 想的太少，没有考虑到api可测试的所有情况。
+* 沟通少。
+* 不够淡定，有时候脱离当时的心情看问题就一下子看出问题了。
+* 多线程，其实有时候多个任务并行的时候并不能很快很有效的切换。
+</code></pre><p>回来路上想了很多出在自己身上的问题，而且好多是当时心情影响的，导致自己的暴躁，然后问题就越来越多，控制情绪，减少线程。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

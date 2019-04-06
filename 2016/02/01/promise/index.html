@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="null" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>promise - 蓝色天空</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="js的异步重点：1、js是单线程2、js是单线程3、js是单线程
+重要的事情说三遍！单线程使js不能像java、c#的代码一样多线程地执行（优劣暂不分析）。
+大多数的任务需要去执行，但是如果需要长时,"> 
+    <meta name="author" content="张小葱"> 
+    <link rel="alternative" href="atom.xml" title="蓝色天空" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">蓝色天空</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://hwzhangd.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">promise</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">promise</h1>
+        <div class="stuff">
+            <span>二月 01, 2016</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/js-promise/">js, promise</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="js的异步"><a href="#js的异步" class="headerlink" title="js的异步"></a>js的异步</h1><p>重点：<br>1、js是单线程<br>2、js是单线程<br>3、js是单线程</p>
+<p>重要的事情说三遍！单线程使js不能像java、c#的代码一样多线程地执行（优劣暂不分析）。</p>
+<p>大多数的任务需要去执行，但是如果需要长时间等待或者计算的任务，后面的任务不得不等它结束再执行，就用户体验来说是页面很卡，对于开发者来说也是资源的浪费，这样的设计显然是不合理的。异步就是将需等待的事件进入“任务队列”，程序继续执行，待“任务队列”的事件通知可以执行了，程序将执行这个任务。详情可看：[JavaScript 运行机制详解：再谈Event Loop] (<a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2014/10/event-loop.html</a>)</p>
+<p>在前端用异步基础只有三个地方：</p>
+<ul>
+<li>setTimeout、setInterval：两种方法的参数均是回调函数、等待时间。区别是setTimeout只执行一次，setInterval可以执行多次。它们都是等待时间过后再执行参数一的回调函数</li>
+<li>XHR请求： 原生的XHR在收到接口返回内容后执行load方法，jquery封装的ajax是放在success里，或者通过直接通过该$ajax.then来执行后续操作（ajax返回的就是一个带promise的对象）；ES6可以不用xhr请求，直接通过fetch可调用接口，fetch本身就是一个promise。</li>
+<li>观察者模式（设计思维，暂不介绍）</li>
+</ul>
+<p>然后复杂的场景来了：</p>
+<p>1、连接性请求，即请求一个接口成功后再去请求另一个，如果这种请求特别多就会出来很多层，可读性与可维护性很差，而且一旦某一项报错就整个挂掉了。所以这时候promise就来了，使用then方法即可。</p>
+<p>2、需要在获取N个接口或文件后再去执行一些操作，promise提供all方法可满中这类需求</p>
+<p>再说nodejs，因为nodejs本身就是异步的，所以在nodejs出现层层包裹很正常，即使是使用异步封装的库也大多是链式的，通过then进行传递。</p>
+<p>还有另一种类似同步的使用库：可参考<a href="http://www.ruanyifeng.com/blog/2015/04/generator.html" target="_blank" rel="noopener">深入掌握 ECMAScript 6 异步编程</a></p>
+<ul>
+<li>co 基于ES6的generator的异步解决方案，代价是 yield 后面的函数必须返回一个 Thunk 或者一个 Promise. <a href="http://www.ruanyifeng.com/blog/2015/05/co.html" target="_blank" rel="noopener">co 函数库的含义和用法</a></li>
+<li>async  <a href="http://www.ruanyifeng.com/blog/2015/05/async.html" target="_blank" rel="noopener">async 函数的含义和用法</a></li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
